@@ -1,0 +1,45 @@
+{
+  "users": [],
+  "products": [
+    {
+      "name": "sp5 kem chống nắng",
+      "img": {
+        "0": {}
+      },
+      "price": "123",
+      "disPrice": "12",
+      "category": "1",
+      "desc": "",
+      "id": 1
+    },
+    {
+      "name": "Phạm Quốc Toản đến từ Hưng Yên",
+      "img": {
+        "0": {}
+      },
+      "price": "123",
+      "disPrice": "1",
+      "category": "1",
+      "desc": "",
+      "id": 2
+    },
+    {
+      "name": "Phạm Quốc Toản",
+      "img": {
+        "0": {}
+      },
+      "price": "421",
+      "disPrice": "12",
+      "category": "1",
+      "desc": "",
+      "id": 3
+    }
+  ],
+  "categorys": [
+    {
+      "id": 1,
+      "name": "Danh mục 1",
+      "desc": "Thông tin danh mục 1"
+    }
+  ]
+}
