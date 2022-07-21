@@ -14,6 +14,8 @@ import { useQuery } from 'react-query';
 // toastr
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
+import { getAllCate } from '../../../api/category';
+import { CategoryType } from '../../../types/Category';
 
 type Props = {
 }
@@ -22,6 +24,7 @@ const { Option } = Select;
 const ProductList = (props: Props) => {
 
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState<CategoryType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,6 +96,14 @@ const ProductList = (props: Props) => {
       toastr.error("Xóa thất bại!");
     }
   }
+  // render category
+  useEffect(() => {
+    const getCate = async () => {
+      const { data } = await getAllCate();
+      setCategory(data);
+    }
+    getCate();
+  }, [])
 
   return (
     <div>
@@ -109,8 +120,9 @@ const ProductList = (props: Props) => {
               <p>Danh mục sản phẩm</p>
               <Input.Group compact>
                 <Danhmuc>
-                  <Option value="1">Laptop</Option>
-                  <Option value="2">Phone</Option>
+                  {category.map((item, index) => {
+                    return <Option value={item.id}>{item.name}</Option>
+                  })}
                 </Danhmuc>
               </Input.Group>
             </Div>

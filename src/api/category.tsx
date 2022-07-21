@@ -1,11 +1,11 @@
 import { CategoryType } from "../types/Category";
 import instance from "./instance";
 
-export const getAll = () => {
+export const getAllCate = () => {
     const url = "/categorys";
     return instance.get(url);
 }
-export const read = (id: any) => {
+export const readCate = (id: any) => {
     const url = `/categorys/${id}`
     return instance.get(url);
 }

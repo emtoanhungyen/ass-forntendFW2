@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { H3, Content, ContentLeft, ContentRight, Div, Span, P, Div1, Submit } from './../../../styles/admin/styleProductAdd';
 import { Form, Input, Space, Select, Button, InputNumber } from 'antd';
 import styled from 'styled-components';
@@ -11,7 +11,8 @@ import "toastr/build/toastr.min.css";
 
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-
+import { CategoryType } from '../../../types/Category';
+import { getAllCate } from '../../../api/category';
 
 type Props = {}
 
@@ -29,7 +30,11 @@ type InputForm = {
 const ProductAdd = (props: Props) => {
   const Navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm<ProductType>();
+  // sate
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [category, setCategory] = useState<CategoryType[]>([]);
+
+
 
   const handelerImg = async (event: any) => {
     const file = event.target.files[0];
@@ -56,6 +61,15 @@ const ProductAdd = (props: Props) => {
       toastr.error("Đã có lỗi xảy ra.")
     }
   }
+
+  // render category
+  useEffect(() => {
+    const getCate = async () => {
+      const { data } = await getAllCate();
+      setCategory(data);
+    }
+    getCate();
+  }, [])
 
   return (
     <div>
@@ -100,9 +114,9 @@ const ProductAdd = (props: Props) => {
             <select {...register('category', { required: true })}
               className="form-select border w-full h-[38px] rounded">
               <option selected>Chọn danh mục</option>
-              <option value="1">Điện thoại</option>
-              <option value="2">Laptop</option>
-              <option value="3">Máy tính bảng</option>
+              {category.map((item, index) => {
+                return <option value={item.name}>{item.name}</option>
+              })}
             </select>
             {errors.category && <span className='text-red-400'>Không được để trống.</span>}
           </div>

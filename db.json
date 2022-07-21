@@ -33,13 +33,50 @@
       "category": "1",
       "desc": "",
       "id": 3
+    },
+    {
+      "name": "Phạm Quốc Toản",
+      "img": {
+        "0": {}
+      },
+      "price": "120",
+      "disPrice": "11",
+      "category": "4",
+      "desc": "",
+      "id": 4
+    },
+    {
+      "name": "sp5 kem chống nắng",
+      "img": {
+        "0": {}
+      },
+      "price": "123",
+      "disPrice": "11",
+      "category": "Máy tính bảng",
+      "desc": "",
+      "id": 5
     }
   ],
   "categorys": [
     {
-      "id": 1,
-      "name": "Danh mục 1",
-      "desc": "Thông tin danh mục 1"
+      "name": "Iphone",
+      "desc": "Danh mục của iPhone",
+      "id": 4
+    },
+    {
+      "name": "Máy tính bảng",
+      "desc": "Danh mục của máy tính bảng",
+      "id": 5
+    },
+    {
+      "name": "Laptop",
+      "desc": "Danh mục của laptop\n",
+      "id": 6
+    },
+    {
+      "name": "điện máy xanh",
+      "desc": "aaaa\n",
+      "id": 7
     }
   ]
 }
