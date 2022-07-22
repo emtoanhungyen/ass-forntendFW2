@@ -9,7 +9,7 @@ export const read = (id: any) => {
     const url = `/products/${id}`
     return instance.get(url);
 }
-export const remove = (id: number) => {
+export const removePr = (id: number) => {
     const url = `/products/${id}`;
     return instance.delete(url);
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DeleteTwoTone, EditTwoTone, PlusSquareOutlined } from '@ant-design/icons'
-import { Space, Table } from 'antd';
+import { Image, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -9,7 +9,7 @@ import {
   Select,
 } from 'antd';
 import { ProductType } from '../../../types/Products';
-import { getAll, remove } from '../../../api/product';
+import { getAll, removePr } from '../../../api/product';
 import { useQuery } from 'react-query';
 // toastr
 import toastr from 'toastr';
@@ -18,34 +18,40 @@ import { getAllCate } from '../../../api/category';
 import { CategoryType } from '../../../types/Category';
 
 type Props = {
+  product: ProductType[],
+  onRemove: (id: number) => void
 }
 const { Option } = Select;
 
-const ProductList = (props: Props) => {
+const ProductList = ({ product, onRemove }: Props) => {
 
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getAll();
-      setProducts(res.data);
-    }
-    fetchData();
-  }, []);
-
-  const { isLoading, data } = useQuery('Products', getAll);
-
+  //antd
   const columns: ColumnsType<ProductType> = [
+    {
+      title: '#',
+      dataIndex: 'key',
+      key: 'key',
+    },
     {
       title: 'Tên sản phẩm',
       dataIndex: 'name',
       key: 'name',
     },
     {
+      title: 'Số lượng',
+      dataIndex: 'quantity',
+      key: 'quantity',
+    },
+    {
       title: 'Ảnh',
       dataIndex: 'img',
       key: 'img',
+      render: (index, record) => (
+        <Image src={record.img} width={150} height={150} />
+      ),
     },
     {
       title: 'Giá',
@@ -75,27 +81,28 @@ const ProductList = (props: Props) => {
           <Link to={`/admin/products/${record.id}/edit`}>
             <EditTwoTone style={{ fontSize: '20px' }} />
           </Link>
-          <button onClick={() => onHandleRemove(record.id!)}>
+          <button onClick={() => onRemove(record.id!)}>
             <DeleteTwoTone style={{ fontSize: '20px' }} />
           </button>
         </Space>
       ),
     },
   ];
-
-  const onHandleRemove = (id: number) => {
-    try {
-      const confirm = window.confirm("Bạn có chắc muốn xóa?");
-      if (confirm) {
-        remove(id);
-        setProducts(products.filter(item => item !== id));
-        toastr.success("Xóa thành công!");
-      }
-    } catch (error) {
-      console.log(error);
-      toastr.error("Xóa thất bại!");
+  const dataSource = product && product.map((item, index) => {
+    return {
+      key: index + 1,
+      id: item.id,
+      name: item.name,
+      img: item.img,
+      price: item.price,
+      disPrice: item.disPrice,
+      category: item.category,
+      quantity: item.quantity,
+      desc: item.desc
     }
-  }
+  });
+
+
   // render category
   useEffect(() => {
     const getCate = async () => {
@@ -137,7 +144,7 @@ const ProductList = (props: Props) => {
         </div>
       </Container>
       <Content>
-        <Table loading={isLoading} columns={columns} dataSource={data?.data} />
+        <Table columns={columns} dataSource={dataSource} />
       </Content>
     </div>
   )

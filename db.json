@@ -3,58 +3,13 @@
   "products": [
     {
       "name": "sp5 kem chống nắng",
-      "img": {
-        "0": {}
-      },
-      "price": "123",
+      "quantity": "12",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658481243/fljafjkmy5a4lq4uvrfm.jpg",
+      "price": "12",
       "disPrice": "12",
-      "category": "1",
-      "desc": "",
-      "id": 1
-    },
-    {
-      "name": "Phạm Quốc Toản đến từ Hưng Yên",
-      "img": {
-        "0": {}
-      },
-      "price": "123",
-      "disPrice": "1",
-      "category": "1",
-      "desc": "",
-      "id": 2
-    },
-    {
-      "name": "Phạm Quốc Toản",
-      "img": {
-        "0": {}
-      },
-      "price": "421",
-      "disPrice": "12",
-      "category": "1",
+      "category": "điện máy xanh",
       "desc": "",
       "id": 3
-    },
-    {
-      "name": "Phạm Quốc Toản",
-      "img": {
-        "0": {}
-      },
-      "price": "120",
-      "disPrice": "11",
-      "category": "4",
-      "desc": "",
-      "id": 4
-    },
-    {
-      "name": "sp5 kem chống nắng",
-      "img": {
-        "0": {}
-      },
-      "price": "123",
-      "disPrice": "11",
-      "category": "Máy tính bảng",
-      "desc": "",
-      "id": 5
     }
   ],
   "categorys": [

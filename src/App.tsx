@@ -19,10 +19,36 @@ import { add, getAllCate, remove } from './api/category';
 // toastr
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
+import { ProductType } from './types/Products';
+import { getAll, removePr } from './api/product';
 
 function App() {
   const [count, setCount] = useState(0)
   const [categorys, setCategorys] = useState<CategoryType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
+
+
+  //products
+  useEffect(() => {
+    const getProducts = async () => {
+      const { data } = await getAll();
+      setProducts(data)
+    }
+    getProducts();
+  }, [])
+  const removeProduct = (id: number) => {
+    try {
+      const confirm = window.confirm("Bạn có chắc muốn xóa sản phẩm này?");
+      if (confirm) {
+        removePr(id);
+        setProducts(products.filter(item => item.id !== id));
+        toastr.success("Xóa thành công!");
+      }
+    } catch (error) {
+      console.log(error);
+      toastr.error("Xóa thất bại!");
+    }
+  }
 
   // Category
   useEffect(() => {
@@ -59,7 +85,7 @@ function App() {
           <Route index element={<HomeAdmin />} />
           {/* router products */}
           <Route path='products' >
-            <Route index element={<ProductList />} />
+            <Route index element={<ProductList product={products} onRemove={removeProduct} />} />
             <Route path='add' element={<ProductAdd />} />
             <Route path=':id/edit' element={<ProductEdit />} />
           </Route>
