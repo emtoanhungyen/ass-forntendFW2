@@ -35,6 +35,7 @@ const ProductAdd = (props: Props) => {
   // sate
   const [products, setProducts] = useState<ProductType[]>([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
+  const [preview, setPreview] = useState('');
 
   // const handelerImg = async (event: any) => {
   //   const file = event.target.files[0];

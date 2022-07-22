@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DeleteTwoTone, EditTwoTone, PlusSquareOutlined } from '@ant-design/icons'
-import { Image, Space, Table } from 'antd';
+import { Image, Space, Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -16,6 +16,8 @@ import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 import { getAllCate } from '../../../api/category';
 import { CategoryType } from '../../../types/Category';
+import { SearchInput } from '../../../styles/admin/Layout';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 type Props = {
   product: ProductType[],
@@ -27,13 +29,14 @@ const ProductList = ({ product, onRemove }: Props) => {
 
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
-
+  const [search, setSearch] = useState("");
   //antd
   const columns: ColumnsType<ProductType> = [
     {
       title: '#',
       dataIndex: 'key',
       key: 'key',
+
     },
     {
       title: 'Tên sản phẩm',
@@ -50,7 +53,7 @@ const ProductList = ({ product, onRemove }: Props) => {
       dataIndex: 'img',
       key: 'img',
       render: (index, record) => (
-        <Image src={record.img} width={150} height={150} />
+        <Image src={record.img} max-width={150} />
       ),
     },
     {
@@ -67,6 +70,14 @@ const ProductList = ({ product, onRemove }: Props) => {
       title: 'Mô tả',
       dataIndex: 'desc',
       key: 'desc',
+      ellipsis: {
+        showTitle: false,
+      },
+      render: desc => (
+        <Tooltip placement="topLeft" title={desc}>
+          {desc}
+        </Tooltip>
+      ),
     },
     {
       title: 'Danh mục',
@@ -88,7 +99,13 @@ const ProductList = ({ product, onRemove }: Props) => {
       ),
     },
   ];
-  const dataSource = product && product.map((item, index) => {
+  const dataSource = product.filter((value) => {
+    if (search == "") {
+      return value
+    } else if (value.name.toLowerCase().includes(search.toLowerCase())) {
+      return value
+    }
+  }).map((item, index) => {
     return {
       key: index + 1,
       id: item.id,
@@ -123,7 +140,7 @@ const ProductList = ({ product, onRemove }: Props) => {
             <Mt5>
               <p>Bộ lọc</p>
             </Mt5>
-            <Div>
+            {/* <Div>
               <p>Danh mục sản phẩm</p>
               <Input.Group compact>
                 <Danhmuc>
@@ -132,6 +149,12 @@ const ProductList = ({ product, onRemove }: Props) => {
                   })}
                 </Danhmuc>
               </Input.Group>
+            </Div> */}
+            <Div>
+              <SearchInput size="middle" prefix={<AiOutlineSearch />}
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                }} />
             </Div>
           </DienthoaiPhai>
         </div>
@@ -144,7 +167,7 @@ const ProductList = ({ product, onRemove }: Props) => {
         </div>
       </Container>
       <Content>
-        <Table columns={columns} dataSource={dataSource} />
+        <Table columns={columns} dataSource={dataSource} size="middle" />
       </Content>
     </div>
   )
@@ -167,6 +190,7 @@ const Mt5 = styled.div`
 `
 const Div = styled.div`
   margin-left: 25px;
+  margin-top: 10px;
 `
 const Danhmuc = styled(Select)`
   width: 352px;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 
 export const uploadImage = async (data: any) => {
     const files = data.img[0];
@@ -13,5 +14,7 @@ export const uploadImage = async (data: any) => {
             "Content-Type": "application/form-data"
         }
     })
+
+
     return anh.data;
 }

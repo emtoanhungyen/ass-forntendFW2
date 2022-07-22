@@ -3,13 +3,33 @@
   "products": [
     {
       "name": "sp5 kem chống nắng",
-      "quantity": "12",
-      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658481243/fljafjkmy5a4lq4uvrfm.jpg",
+      "quantity": "12212",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658484693/ydqgcsp3x7cnw2rvt2pi.jpg",
       "price": "12",
       "disPrice": "12",
-      "category": "điện máy xanh",
-      "desc": "",
-      "id": 3
+      "category": "Iphone",
+      "desc": "sbcdbchdbcbdcbdchbdhcbdhbchdb  hsbcsbchdbchdbchdbchdbchdbchd hcbdbchdbchdbchdbchd c hhdbchdcdchbdc dbc hhdcbd chd cbdc ghdvc",
+      "id": 4
+    },
+    {
+      "name": "a",
+      "quantity": "12",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658502953/o2dpthrywn21on6yx8rp.jpg",
+      "price": "12",
+      "disPrice": "12",
+      "category": "Laptop",
+      "desc": "12",
+      "id": 5
+    },
+    {
+      "name": "a",
+      "quantity": "12",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658502954/ifvnnx8ectcxti1icuc3.jpg",
+      "price": "12",
+      "disPrice": "12",
+      "category": "Laptop",
+      "desc": "12",
+      "id": 6
     }
   ],
   "categorys": [

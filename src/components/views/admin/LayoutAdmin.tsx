@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { LaptopOutlined, TabletOutlined, PhoneOutlined, CustomerServiceOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import styled from 'styled-components';
 import Logo from './../../../assets/images/anhhtus-logo 2.png'
-import { AutoComplete, Input } from 'antd';
 import { AiOutlineSearch } from "react-icons/ai";
 import { A, ContainerHeader, Image, SearchBar, SearchInput, SpanName } from './../../../styles/admin/Layout'
 import Sidebar from './Sidebar';
@@ -18,12 +15,11 @@ const options = [
     { value: 'Wall Street' },
 ];
 
-
-
-
 type Props = {}
 
 const LayoutAdmin = (props: Props) => {
+    const [search, setSearch] = useState("");
+
     return (
         <div>
             <Layout>
@@ -40,7 +36,10 @@ const LayoutAdmin = (props: Props) => {
                             option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                         }
                     >
-                        <SearchInput size="middle" prefix={<AiOutlineSearch />} />
+                        <SearchInput size="middle" prefix={<AiOutlineSearch />}
+                            onChange={(event) => {
+                                setSearch(event.target.value);
+                            }} />
                     </SearchBar>
                     <SpanName>Xin chào Phạm Quốc Toản</SpanName>
                 </ContainerHeader>
