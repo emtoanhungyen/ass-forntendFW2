@@ -30,6 +30,8 @@ const ProductList = ({ product, onRemove }: Props) => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
   const [search, setSearch] = useState("");
+  const [filterCategory, setFilterCategory] = useState<any>("");
+  
   //antd
   const columns: ColumnsType<ProductType> = [
     {
@@ -83,6 +85,7 @@ const ProductList = ({ product, onRemove }: Props) => {
       title: 'Danh mục',
       dataIndex: 'category',
       key: 'category',
+
     },
     {
       title: 'Thao tác',
@@ -92,9 +95,9 @@ const ProductList = ({ product, onRemove }: Props) => {
           <Link to={`/admin/products/${record.id}/edit`}>
             <EditTwoTone style={{ fontSize: '20px' }} />
           </Link>
-          <button onClick={() => onRemove(record.id!)}>
+          <Button onClick={() => onRemove(record.id!)}>
             <DeleteTwoTone style={{ fontSize: '20px' }} />
-          </button>
+          </Button>
         </Space>
       ),
     },
@@ -200,5 +203,9 @@ const Danhmuc = styled(Select)`
 `
 const Content = styled.div`
   margin-top: 25px;
+`
+const Button = styled.button`
+  background-color: white;
+  border: 1px solid white;
 `
 export default ProductList

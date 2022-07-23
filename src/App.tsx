@@ -20,7 +20,8 @@ import { add, getAllCate, remove } from './api/category';
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 import { ProductType } from './types/Products';
-import { getAll, removePr } from './api/product';
+import { addPro, getAll, removePr } from './api/product';
+import { message } from 'antd';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -49,6 +50,10 @@ function App() {
       toastr.error("Xóa thất bại!");
     }
   }
+  const addProduct = async (product: ProductType) => {
+    const { data } = await addPro(product);
+    return setProducts([...products, data])
+  }
 
   // Category
   useEffect(() => {
@@ -63,7 +68,8 @@ function App() {
     const confirm = window.confirm("Bạn có chắc muỗn xóa?");
     if (confirm) {
       const { data } = await remove(id);
-      toastr.success("Bạn đã xóa thành công");
+      // toastr.success("Bạn đã xóa thành công");
+      message.success("Bạn đã xóa thành công.");
       return setCategorys(categorys.filter(item => item.id !== id));
     }
   }
@@ -86,7 +92,7 @@ function App() {
           {/* router products */}
           <Route path='products' >
             <Route index element={<ProductList product={products} onRemove={removeProduct} />} />
-            <Route path='add' element={<ProductAdd />} />
+            <Route path='add' element={<ProductAdd onAdd={addProduct} />} />
             <Route path=':id/edit' element={<ProductEdit />} />
           </Route>
           {/* router category */}

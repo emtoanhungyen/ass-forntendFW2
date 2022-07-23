@@ -4,7 +4,7 @@ import { Form, Input, Space, Select, Button, InputNumber } from 'antd';
 import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { ProductType } from '../../../types/Products';
-import { add } from '../../../api/product';
+import { addPro } from '../../../api/product';
 // toastr
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
@@ -15,7 +15,9 @@ import { CategoryType } from '../../../types/Category';
 import { getAllCate } from '../../../api/category';
 import { uploadImage } from '../../../utils/upFiletoCloudinary';
 
-type Props = {}
+type Props = {
+  onAdd: (product: ProductType) => void
+}
 
 type InputForm = {
   id?: number,
@@ -29,7 +31,7 @@ type InputForm = {
 }
 
 
-const ProductAdd = (props: Props) => {
+const ProductAdd = ({ onAdd }: Props) => {
   const Navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm<ProductType>();
   // sate
@@ -59,8 +61,8 @@ const ProductAdd = (props: Props) => {
     console.log(photo.url);
     data.img = photo.url
 
-    add(data);
-    setProducts([...products, data]);
+    await onAdd(data)
+    setProducts([...products, data])
     toastr.success("Bạn đã thêm thành công.");
     Navigate('/admin/products');
 

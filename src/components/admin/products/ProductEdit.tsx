@@ -14,6 +14,7 @@ type InputForm = {
   id?: number,
   name: string,
   price: number,
+  quantity: number,
   disPrice: number,
   img?: string,
   desc: string,
@@ -39,8 +40,7 @@ const ProductEdit = (props: Props) => {
   const onSubmit: SubmitHandler<InputForm> = (data) => {
     try {
       update(data);
-      //reRender
-      // setProducts(products.map(item => item.id == data.id ? data : item));
+      setProducts([...products, data])
       navigate(-1);
       toastr.success("Cập nhật sản phẩm thành công");
     } catch (error) {

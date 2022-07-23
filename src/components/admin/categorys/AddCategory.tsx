@@ -18,16 +18,16 @@ type InputForm = {
     desc?: string
 }
 
-const AddCategory = (props: Props) => {
+const AddCategory = ({onAdd}: Props) => {
     const [category, setCategory] = useState<CategoryType[]>([]);
     const { register, handleSubmit, formState: { errors } } = useForm<CategoryType>();
     const Navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<InputForm> = (data) => {
+    const onSubmit: SubmitHandler<InputForm> =  (data1) => {
         try {
-            add(data);
-            // setCategory([...category, data]);
-            Navigate(-1);
+              onAdd(data1);
+            setCategory([...category, data1]);
+            Navigate('/admin/categorys');
             toastr.success("Thêm danh mục thành công!");
         } catch (error) {
             console.log(error);
