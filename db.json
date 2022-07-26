@@ -4,7 +4,7 @@
     {
       "name": "Sản phẩm 1",
       "quantity": "12",
-      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658536672/kk1uvxn25puip8lwrtt3.jpg",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658540627/ix5gihxp2bzpskwyuqnd.png",
       "price": "12",
       "disPrice": "1",
       "category": "Iphone",
@@ -12,12 +12,12 @@
       "id": 1
     },
     {
-      "name": "Phạm Quốc Toản",
+      "name": "Phạm Quốc Toản update",
       "quantity": "1",
-      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658537898/ytjrtnsxj1ecfsaw9scz.jpg",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1658540993/wavk4cx8to65uusd1rgv.jpg",
       "price": "12",
       "disPrice": "12",
-      "category": "Iphone",
+      "category": "1",
       "desc": "",
       "id": 2
     }
@@ -25,7 +25,7 @@
   "categorys": [
     {
       "name": "Iphone",
-      "desc": "Danh mục của iPhone",
+      "desc": "Danh mục của iPhone",  
       "id": 4
     },
     {
@@ -39,7 +39,7 @@
       "id": 6
     },
     {
-      "name": "đình ngyu",
+      "name": "dm demo",
       "desc": "",
       "id": 7
     }

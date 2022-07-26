@@ -7,6 +7,7 @@ import axios from 'axios'
 import { read, update } from '../../../api/product'
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
+import { uploadImage } from '../../../utils/upFiletoCloudinary'
 type Props = {
 }
 
@@ -37,8 +38,12 @@ const ProductEdit = (props: Props) => {
   }, [id])
 
 
-  const onSubmit: SubmitHandler<InputForm> = (data) => {
+  const onSubmit: SubmitHandler<InputForm> = async (data) => {
     try {
+      const photo = await uploadImage(data);
+      console.log(photo.url);
+      data.img = photo.url
+
       update(data);
       setProducts([...products, data])
       navigate(-1);
@@ -106,9 +111,7 @@ const ProductEdit = (props: Props) => {
 
           <Submit type="submit" className="btn btn-primary">Submit</Submit>
         </form>
-
       </div>
-
     </div>
   )
 }
