@@ -31,8 +31,8 @@ const Container = styled(Menu)`
 `
 const Navbar = styled.div`
     align-items: center;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
     display: flex;
 
 `

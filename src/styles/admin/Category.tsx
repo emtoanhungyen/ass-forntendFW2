@@ -24,7 +24,7 @@ export const Div = styled.div`
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 500px));
     gap: 10px;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
     padding-top: 1%;
 `

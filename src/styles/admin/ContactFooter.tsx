@@ -11,8 +11,8 @@ export const Container = styled.div`
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 300px));
     gap: 1rem;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
     background-color: white;
 `
 export const Div = styled.div`
