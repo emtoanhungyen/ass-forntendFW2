@@ -22,6 +22,8 @@ import "toastr/build/toastr.min.css";
 import { ProductType } from './types/Products';
 import { addPro, getAll, removePr } from './api/product';
 import { message } from 'antd';
+import Signin from './pages/views/Signin';
+import Signup from './pages/views/Signup';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -102,7 +104,11 @@ function App() {
             <Route path=':id/edit' element={<EditCategory />} />
           </Route>
         </Route>
+        {/* 404 */}
         <Route path='*' element={<Errors404 />} />
+        {/* Signin Signup */}
+        <Route path='signin' element={<Signin />} />
+        <Route path='signup' element={<Signup />} />
       </Routes>
     </div>
   )
