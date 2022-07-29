@@ -1,5 +1,5 @@
 import { Image, Space } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BorderBoxSPCL, BoxPreview, BoxPreview1, BoxSPCL, BtnAddtoCart, Button, Container, Desc, DisPrice, DivBox, Flex, FlexL, FlexR, P, Preview, Price, Py2, Span1, Span2, SpanTitle, TitleSPCL } from '../../styles/views/ProductDetail'
 import IphoneDetail from './../../assets/images/iphoneDetail.png'
 import IphoneDetailPreview from './../../assets/images/ipDetailPreview.png'
@@ -7,11 +7,22 @@ import ngoisao from './../../assets/images/ngoisao.png'
 import iconcart from './../../assets/images/Iconcart.png'
 import Spcl from './../../assets/images/spcl1.png'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { read } from '../../api/product'
+import { ProductType } from '../../types/Products'
 
 type Props = {}
 
 const ProductDetail = (props: Props) => {
+    const { id } = useParams();
+    const [product, setProducts] = useState<ProductType>();
+    useEffect(() => {
+        const productDetail = async () => {
+            const { data } = await read(id);
+            setProducts(data)
+        }
+        productDetail();
+    }, [])
     return (
         <div>
             <Container>
@@ -21,7 +32,7 @@ const ProductDetail = (props: Props) => {
             <Container>
                 <Flex>
                     <FlexL>
-                        <Image src={IphoneDetail} width={358} height={358} />
+                        <Image src={product?.img} width={358} height={358} />
                         <Preview>
                             <BoxPreview1>
                                 <Style>
@@ -54,11 +65,11 @@ const ProductDetail = (props: Props) => {
                     <FlexR>
                         <div>
                             <div>
-                                <Price>11.690.000 ₫</Price>
-                                <DisPrice>12.990.000 ₫</DisPrice>
+                                <Price>{product?.price} ₫</Price>
+                                <DisPrice>{product?.disPrice} ₫</DisPrice>
                             </div>
                             <Desc>
-                                <p> Mô tả ngắn: Trước khi mua bất kỳ chiếc điện thoại nào, người dùng cũng sẽ quan tâm đến thiết kế sản phẩm trước. Với phiên bản A73, Samsung đã tạo nên một chiếc smartphone với vẻ ngoài mang đến cảm giác sang trọng và tinh tế.</p>
+                                <p>{product?.desc}</p>
                             </Desc>
                         </div>
                         <BtnAddtoCart>

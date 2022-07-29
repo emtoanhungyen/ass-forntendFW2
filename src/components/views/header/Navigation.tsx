@@ -23,7 +23,7 @@ const Navigation = (props: Props) => {
             </Div>
             <Div>
                 <img src={CarIcon} alt="" />
-                <A href="">Giỏ hàng</A>
+                <A href="/cart">Giỏ hàng</A>
             </Div>
         </Container>
     )

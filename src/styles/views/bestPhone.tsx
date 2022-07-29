@@ -38,6 +38,8 @@ export const DivText = styled.div`
     border-radius: 5px;
 `
 export const Box = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
     margin-top: 15px;
 `

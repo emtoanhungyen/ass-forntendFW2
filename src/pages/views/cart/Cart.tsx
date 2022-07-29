@@ -1,17 +1,23 @@
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Image, Space } from 'antd'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { BorderButton, ButtonDathang, Container, DivTongTien, FlexButton, FlexContent, FlexImg, My2, SpanCart } from '../../styles/views/Cart'
-import { Flex, FlexR, Span1, Span2 } from '../../styles/views/ProductDetail'
+import store from '../../../redux/Store'
+import { Flex, Span1, Span2 } from '../../../styles/views/ProductDetail'
+import { BorderButton, ButtonDathang, Container, DivTongTien, FlexButton, FlexContent, FlexImg, My2, SpanCart } from '../../../styles/views/Cart'
 
 // improt img
-import ImgCart from './../../assets/images/imgcart.png'
+import ImgCart from './../../../assets/images/imgcart.png'
 
 type Props = {}
 
 const Cart = (props: Props) => {
+    const data = useSelector(store => store);
+    console.log(data);
+    
+
     return (
         <Container>
             <My2>
