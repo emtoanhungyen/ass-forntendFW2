@@ -25,6 +25,7 @@ import { message } from 'antd';
 import Signin from './pages/views/Signin';
 import Signup from './pages/views/Signup';
 import ProductDetail from './pages/views/ProductDetail';
+import Cart from './pages/views/Cart';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -88,7 +89,8 @@ function App() {
       <Routes>
         <Route path='/' element={<LayoutHome />}>
           <Route index element={<Home />} />
-          <Route path='/product/:id' element={<ProductDetail />} />
+          <Route path='product/:id' element={<ProductDetail />} />
+          <Route path='cart' element={<Cart />} />
         </Route>
         {/* router admin */}
         <Route path='admin' element={<LayoutAdmin />} >
