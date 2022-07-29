@@ -24,6 +24,7 @@ import { addPro, getAll, removePr } from './api/product';
 import { message } from 'antd';
 import Signin from './pages/views/Signin';
 import Signup from './pages/views/Signup';
+import ProductDetail from './pages/views/ProductDetail';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -87,6 +88,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LayoutHome />}>
           <Route index element={<Home />} />
+          <Route path='/product/:id' element={<ProductDetail />} />
         </Route>
         {/* router admin */}
         <Route path='admin' element={<LayoutAdmin />} >
