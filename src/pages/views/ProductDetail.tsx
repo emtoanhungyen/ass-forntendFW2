@@ -10,19 +10,23 @@ import styled from 'styled-components'
 import { Link, useParams } from 'react-router-dom'
 import { read } from '../../api/product'
 import { ProductType } from '../../types/Products'
+import { useDispatch } from 'react-redux'
 
-type Props = {}
+type Props = {
+}
 
 const ProductDetail = (props: Props) => {
     const { id } = useParams();
-    const [product, setProducts] = useState<ProductType>();
+    const [productDetail, setProductDetail] = useState<ProductType>();
     useEffect(() => {
         const productDetail = async () => {
             const { data } = await read(id);
-            setProducts(data)
+            setProductDetail(data)
         }
         productDetail();
     }, [])
+
+    
     return (
         <div>
             <Container>
@@ -32,7 +36,7 @@ const ProductDetail = (props: Props) => {
             <Container>
                 <Flex>
                     <FlexL>
-                        <Image src={product?.img} width={358} height={358} />
+                        <Image src={productDetail?.img} width={358} height={358} />
                         <Preview>
                             <BoxPreview1>
                                 <Style>
@@ -65,11 +69,11 @@ const ProductDetail = (props: Props) => {
                     <FlexR>
                         <div>
                             <div>
-                                <Price>{product?.price} ₫</Price>
-                                <DisPrice>{product?.disPrice} ₫</DisPrice>
+                                <Price>{productDetail?.price} ₫</Price>
+                                <DisPrice>{productDetail?.disPrice} ₫</DisPrice>
                             </div>
                             <Desc>
-                                <p>{product?.desc}</p>
+                                <p>{productDetail?.desc}</p>
                             </Desc>
                         </div>
                         <BtnAddtoCart>

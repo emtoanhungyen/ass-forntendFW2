@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import 'antd/dist/antd.css';
 import Home from './components/views/Home';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useParams } from 'react-router-dom'
 import LayoutHome from './components/views/LayoutHome';
 import LayoutAdmin from './components/views/admin/LayoutAdmin';
 import HomeAdmin from './components/views/admin/HomeAdmin';
@@ -20,7 +20,7 @@ import { add, getAllCate, remove } from './api/category';
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 import { ProductType } from './types/Products';
-import { addPro, getAll, removePr } from './api/product';
+import { addPro, getAll, read, removePr } from './api/product';
 import { message } from 'antd';
 import Signin from './pages/views/Signin';
 import Signup from './pages/views/Signup';
@@ -59,6 +59,7 @@ function App() {
     return setProducts([...products, data])
   }
 
+  
   // Category
   useEffect(() => {
     const getCategory = async () => {

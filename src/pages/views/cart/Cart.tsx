@@ -1,10 +1,8 @@
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Image, Space } from 'antd'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import store from '../../../redux/Store'
 import { Flex, Span1, Span2 } from '../../../styles/views/ProductDetail'
 import { BorderButton, ButtonDathang, Container, DivTongTien, FlexButton, FlexContent, FlexImg, My2, SpanCart } from '../../../styles/views/Cart'
 
@@ -14,9 +12,7 @@ import ImgCart from './../../../assets/images/imgcart.png'
 type Props = {}
 
 const Cart = (props: Props) => {
-    const data = useSelector(store => store);
-    console.log(data);
-    
+
 
     return (
         <Container>
@@ -41,9 +37,9 @@ const Cart = (props: Props) => {
                             <Flex>
                                 <span>Chọn số lượng: </span>
                                 <BorderButton>
-                                    <span style={{width: '25%'}}><MinusOutlined /></span>
-                                    <span style={{width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px'}}>0</span>
-                                    <span  style={{width: '25%'}}><PlusOutlined /></span>
+                                    <span style={{ width: '25%' }}><MinusOutlined /></span>
+                                    <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>0</span>
+                                    <span style={{ width: '25%' }}><PlusOutlined /></span>
                                 </BorderButton>
                             </Flex>
                         </Space>
@@ -69,9 +65,9 @@ const Cart = (props: Props) => {
                             <Flex>
                                 <span>Chọn số lượng: </span>
                                 <BorderButton>
-                                    <span style={{width: '25%'}}><MinusOutlined /></span>
-                                    <span style={{width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px'}}>0</span>
-                                    <span  style={{width: '25%'}}><PlusOutlined /></span>
+                                    <span style={{ width: '25%' }}><MinusOutlined /></span>
+                                    <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>0</span>
+                                    <span style={{ width: '25%' }}><PlusOutlined /></span>
                                 </BorderButton>
                             </Flex>
                         </Space>
@@ -97,9 +93,9 @@ const Cart = (props: Props) => {
                             <Flex>
                                 <span>Chọn số lượng: </span>
                                 <BorderButton>
-                                    <span style={{width: '25%'}}><MinusOutlined /></span>
-                                    <span style={{width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px'}}>0</span>
-                                    <span  style={{width: '25%'}}><PlusOutlined /></span>
+                                    <span style={{ width: '25%' }}><MinusOutlined /></span>
+                                    <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>0</span>
+                                    <span style={{ width: '25%' }}><PlusOutlined /></span>
                                 </BorderButton>
                             </Flex>
                         </Space>
@@ -119,7 +115,7 @@ const Cart = (props: Props) => {
                     <ButtonDathang>Tiến hành đặt hàng</ButtonDathang>
                 </My2>
                 <LinkCart>
-                    <Link style={{color: 'red'}} to=''>Chọn thêm sản phẩm khác</Link>
+                    <Link style={{ color: 'red' }} to=''>Chọn thêm sản phẩm khác</Link>
                 </LinkCart>
             </My2>
         </Container>
