@@ -48,10 +48,15 @@ const Signup = (props: Props) => {
 
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
+                            <ButCustom type="primary" htmlType="submit">
+                                Đăng ký
+                            </ButCustom>
                         </Form.Item>
+                        <hr />
+                        <Custom>
+                            <span>or</span>
+                            <Link to='/signin'>Đăng nhập</Link>
+                        </Custom>
                     </FormCustom>
                 </Left>
                 <Right>
@@ -65,10 +70,16 @@ const Signup = (props: Props) => {
         </Container>
     )
 }
+export const Custom = styled.div`
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+`
 export const FormCustom = styled(Form)`
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 100px;
+    margin-top: 55px;
 `
 export const FormItem = styled(Form.Item)`
     left: 10px;
@@ -86,9 +97,11 @@ export const InputCustom1 = styled(Input.Password)`
     margin-left: 7px;
 `
 export const ButCustom = styled(Button)`
-    width: 525px;
-    height: 40px;
+    width: 200px;
+    height: 45px;
     background-color: #FF424E;
     border: 1px solid #FFFFFF;
+    border-radius: 6px;
+    margin-right: 10px;
 `
 export default Signup

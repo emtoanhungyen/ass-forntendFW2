@@ -42,7 +42,6 @@ const BestPhone = ({ products }: Props) => {
                                         [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới 1.000.000đ
                                     </TextNote>
                                 </DivText>
-                                <button >add to cart</button>
                             </Space>
                         </BoxPhone>
                     })}

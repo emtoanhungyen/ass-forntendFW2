@@ -17,7 +17,7 @@ const Cart = (props: Props) => {
     return (
         <Container>
             <My2>
-                <Link style={{ color: 'red' }} to=''>Trở về</Link>
+                <Link style={{ color: 'red' }} to='/'>Trở về</Link>
                 <SpanCart>Giỏ hàng</SpanCart>
             </My2>
             <My2>

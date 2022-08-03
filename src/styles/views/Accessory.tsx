@@ -19,7 +19,7 @@ export const DivBox = styled.div`
 export const Box = styled.div`
     width: 111px;
     height: 125px;
-    background-color: #FFA3A3;
+    /* background-color: #FFA3A3; */
     border-radius: 10px;
 `
 export const Py2 = styled.div`

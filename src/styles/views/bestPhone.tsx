@@ -43,3 +43,6 @@ export const Box = styled.div`
     gap: 1rem;
     margin-top: 15px;
 `
+export const ButtonToCart = styled.button`
+    width: 50px;
+`

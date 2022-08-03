@@ -4,6 +4,7 @@ import { Container } from '../../styles/views/home'
 import { ProductType } from '../../types/Products'
 import Accessory from './main/Accessory'
 import BestPhone from './main/BestPhone'
+import LaptopComputer from './main/LaptopComputer'
 import Sider from './siderMenu/Sider'
 
 
@@ -23,6 +24,7 @@ const Home = (props: Props) => {
       <Sider />
       <BestPhone products={products} />
       <Accessory />
+      <LaptopComputer />
     </Container>
   )
 }
