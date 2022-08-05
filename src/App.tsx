@@ -28,19 +28,12 @@ import ProductDetail from './pages/views/ProductDetail';
 import Cart from './pages/views/cart/Cart';
 
 function App() {
+
   const [count, setCount] = useState(0)
   const [categorys, setCategorys] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
 
-
   //products
-  useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await getAll();
-      setProducts(data)
-    }
-    getProducts();
-  }, [])
   const removeProduct = (id: number) => {
     try {
       const confirm = window.confirm("Bạn có chắc muốn xóa sản phẩm này?");
@@ -59,15 +52,7 @@ function App() {
     return setProducts([...products, data])
   }
 
-  
   // Category
-  useEffect(() => {
-    const getCategory = async () => {
-      const { data } = await getAllCate();
-      setCategorys(data)
-    }
-    getCategory();
-  }, [])
 
   const onHandleRemove = async (id: any) => {
     const confirm = window.confirm("Bạn có chắc muỗn xóa?");
@@ -84,7 +69,6 @@ function App() {
     return setCategorys([...categorys, data]);
   }
 
-
   return (
     <div className="App">
       <Routes>
@@ -100,13 +84,13 @@ function App() {
           <Route index element={<HomeAdmin />} />
           {/* router products */}
           <Route path='products' >
-            <Route index element={<ProductList product={products} onRemove={removeProduct} />} />
+            <Route index element={<ProductList onRemove={removeProduct} />} />
             <Route path='add' element={<ProductAdd onAdd={addProduct} />} />
             <Route path=':id/edit' element={<ProductEdit />} />
           </Route>
           {/* router category */}
           <Route path='categorys'>
-            <Route index element={<ListCategory removeCate={onHandleRemove} categorys={categorys} />} />
+            <Route index element={<ListCategory removeCate={onHandleRemove} />} />
             <Route path='add' element={<AddCategory onAdd={onHandleCreate} />} />
             <Route path=':id/edit' element={<EditCategory />} />
           </Route>

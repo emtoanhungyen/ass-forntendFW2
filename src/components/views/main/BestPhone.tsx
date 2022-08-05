@@ -1,18 +1,27 @@
 import { Image, Space, Typography } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useAppDispatch, useAppSelector } from '../../../app/hook'
+import { getProducts } from '../../../features/ProductSlice'
 import { Box, BoxPhone, Container, DisPrice, DivPhone, DivText, DivTitle, Price, Span } from '../../../styles/views/bestPhone'
 import { ProductType } from '../../../types/Products'
 
-type Props = {
-    products: ProductType[]
-}
+type Props = {}
 
 const { Text } = Typography
 
-const BestPhone = ({ products }: Props) => {
+const BestPhone = (props: Props) => {
+    const products = useAppSelector(item => item.product.value)
+    console.log(products);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        // useAppDispatch(getProducts())
+        dispatch<any>(getProducts())
+    }, [])
+
     return (
         <Container>
             <DivTitle>
@@ -20,7 +29,7 @@ const BestPhone = ({ products }: Props) => {
             </DivTitle>
             <DivPhone>
                 <Box>
-                    {products?.map(item => {
+                    {products.map((item : any,index) => {
                         return <BoxPhone >
                             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                                 <div>

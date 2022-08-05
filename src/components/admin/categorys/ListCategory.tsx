@@ -1,19 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, Space } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { CategoryType } from '../../../types/Category'
 import { DeleteTwoTone, EditTwoTone, PlusSquareOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useAppSelector } from '../../../app/hook'
+import { useDispatch } from 'react-redux'
+import { getCategorys } from '../../../features/CategorySlice'
 
 type Props = {
-    categorys: CategoryType[],
     removeCate: (id: any) => void
 }
 
-const ListCategory = ({ categorys, removeCate }: Props) => {
+const ListCategory = ({ removeCate }: Props) => {
+    const categorys = useAppSelector((item: any) => item.category.values)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch<any>(getCategorys())
+    }, [])
 
-    const dataSource = categorys && categorys.map((item, index) => {
+    const dataSource = categorys?.map((item: CategoryType, index: any) => {
         return {
             index: index + 1,
             id: item.id,

@@ -10,23 +10,28 @@ import styled from 'styled-components'
 import { Link, useParams } from 'react-router-dom'
 import { read } from '../../api/product'
 import { ProductType } from '../../types/Products'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useAppSelector } from '../../app/hook'
+import { getOneProduct } from '../../features/ProductSlice'
+import cartSlice from './cart/CartSlice'
 
 type Props = {
 }
 
 const ProductDetail = (props: Props) => {
     const { id } = useParams();
-    const [productDetail, setProductDetail] = useState<ProductType>();
+    const productDetail = useAppSelector((item: any) => item.product.value);
+    
+    const dispatch = useDispatch()
+
+    const addToCar = (cart: any) => {
+        dispatch<any>(addToCar(cart));
+    }
+
     useEffect(() => {
-        const productDetail = async () => {
-            const { data } = await read(id);
-            setProductDetail(data)
-        }
-        productDetail();
+        dispatch<any>(getOneProduct(id))
     }, [])
 
-    
     return (
         <div>
             <Container>
@@ -36,7 +41,7 @@ const ProductDetail = (props: Props) => {
             <Container>
                 <Flex>
                     <FlexL>
-                        <Image src={productDetail?.img} width={358} height={358} />
+                        <Image src={productDetail.img} width={358} height={358} />
                         <Preview>
                             <BoxPreview1>
                                 <Style>

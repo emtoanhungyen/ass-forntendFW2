@@ -18,20 +18,25 @@ import { getAllCate } from '../../../api/category';
 import { CategoryType } from '../../../types/Category';
 import { SearchInput } from '../../../styles/admin/Layout';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { useAppDispatch, useAppSelector } from '../../../app/hook';
+import { getProducts } from '../../../features/ProductSlice';
+import { useDispatch } from 'react-redux';
 
 type Props = {
-  product: ProductType[],
   onRemove: (id: number) => void
 }
 const { Option } = Select;
 
-const ProductList = ({ product, onRemove }: Props) => {
+const ProductList = ({ onRemove }: Props) => {
 
-  const [products, setProducts] = useState([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState<any>("");
-  
+  const products = useAppSelector(item => item.product.value);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch<any>(getProducts());
+  }, [])
   //antd
   const columns: ColumnsType<ProductType> = [
     {
@@ -102,13 +107,13 @@ const ProductList = ({ product, onRemove }: Props) => {
       ),
     },
   ];
-  const dataSource = product.filter((value) => {
+  const dataSource = products.filter((value: ProductType) => {
     if (search == "") {
       return value
     } else if (value.name.toLowerCase().includes(search.toLowerCase())) {
       return value
     }
-  }).map((item, index) => {
+  }).map((item: ProductType, index) => {
     return {
       key: index + 1,
       id: item.id,

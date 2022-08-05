@@ -11,18 +11,10 @@ import Sider from './siderMenu/Sider'
 type Props = {}
 
 const Home = (props: Props) => {
-  const [products, setProducts] = useState<ProductType[]>([]);
-  useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await getAll();
-      setProducts(data)
-    }
-    getProducts();
-  }, [])
   return (
     <Container>
       <Sider />
-      <BestPhone products={products} />
+      <BestPhone/>
       <Accessory />
       <LaptopComputer />
     </Container>
