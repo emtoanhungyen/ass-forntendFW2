@@ -1,6 +1,6 @@
 import { Image, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { BorderBoxSPCL, BoxPreview, BoxPreview1, BoxSPCL, BtnAddtoCart, Button, Container, Desc, DisPrice, DivBox, Flex, FlexL, FlexR, P, Preview, Price, Py2, Span1, Span2, SpanTitle, TitleSPCL } from '../../styles/views/ProductDetail'
+import { BorderBoxSPCL, BoxPreview, BoxPreview1, BoxSPCL, Button, Container, Desc, DisPrice, DivAddToCart, DivBox, DivClick, Flex, FlexL, FlexR, P, Preview, Price, Py2, Span1, Span2, SpanTitle, TitleSPCL } from '../../styles/views/ProductDetail'
 import IphoneDetailPreview from './../../assets/images/ipDetailPreview.png'
 import ngoisao from './../../assets/images/ngoisao.png'
 import iconcart from './../../assets/images/Iconcart.png'
@@ -20,11 +20,10 @@ type Props = {
 const ProductDetail = (props: Props) => {
     const { id } = useParams();
     const productDetail = useAppSelector((item: any) => item.product.value);
-
     const dispatch = useAppDispatch()
 
-    const addToCart = (item: ProductType) => {
-        dispatch<any>(addToCart(item))
+    const addTo = (item: any) => {
+        dispatch(addToCart(item));
     }
 
     useEffect(() => {
@@ -33,6 +32,7 @@ const ProductDetail = (props: Props) => {
 
     return (
         <div>
+            { }
             <Container>
                 <SpanTitle>{productDetail.name}</SpanTitle>
             </Container>
@@ -40,7 +40,7 @@ const ProductDetail = (props: Props) => {
             <Container>
                 <Flex>
                     <FlexL>
-                        <Image src={productDetail.img} width={358} height={358} />
+                        <Image src={productDetail?.img} width={358} height={358} />
                         <Preview>
                             <BoxPreview1>
                                 <Style>
@@ -80,13 +80,17 @@ const ProductDetail = (props: Props) => {
                                 <p>{productDetail?.desc}</p>
                             </Desc>
                         </div>
-                        <BtnAddtoCart>
-                            <Button>Mua ngay</Button>
-                            <BorderImg>
-                                <img style={{ paddingTop: '10px', paddingLeft: '10px' }} src={iconcart} />
-                            </BorderImg>
-                            <P>Thêm vào giỏ hàng</P>
-                        </BtnAddtoCart>
+                        <DivClick>
+                            <div>
+                                <Button>Mua ngay</Button>
+                            </div>
+                            <DivAddToCart>
+                                <BorderImg onClick={() => addTo(productDetail)}>
+                                    <img style={{ paddingTop: '10px', paddingLeft: '10px' }} src={iconcart} />
+                                </BorderImg>
+                                <P onClick={() => addTo(productDetail)} >Thêm vào giỏ hàng</P>
+                            </DivAddToCart>
+                        </DivClick>
                     </FlexR>
                 </Flex>
                 {/* Sản phẩm cùng loại */}

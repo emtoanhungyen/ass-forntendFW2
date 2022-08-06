@@ -52,9 +52,13 @@ export const FlexR = styled.div`
 export const Desc = styled.div`
     margin-top: 10px;
 `
-export const BtnAddtoCart = styled.div`
+export const DivClick = styled.div`
     margin-top: 290px;
     display: flex;
+`
+export const DivAddToCart = styled.div`
+    display: flex;
+    margin-left: 15px;
 `
 export const Button = styled.button`
     width: 230px;

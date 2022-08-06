@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../../../app/hook'
 import { addToCart } from '../../../features/CartSlice'
 import { getProducts } from '../../../features/ProductSlice'
-import { Box, BoxPhone, Container, DisPrice, DivPhone, DivText, DivTitle, Price, Span } from '../../../styles/views/bestPhone'
+import { Box, BoxPhone, ButtonToCart, Container, DisPrice, DivPhone, DivText, DivTitle, Price, Span } from '../../../styles/views/bestPhone'
 import { ProductType } from '../../../types/Products'
 
 type Props = {}
@@ -33,18 +33,16 @@ const BestPhone = (props: Props) => {
             </DivTitle>
             <DivPhone>
                 <Box>
-                    {products?.map((item : any,index) => {
-                        return <BoxPhone>
+                    {products.map((item: any, index) => {
+                        return <BoxPhone key={index}>
                             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                                 <div>
-                                    <Link to={`/product/${item.id}`} >
-                                        <Image width={160} height={160} src={item.img} />
-                                    </Link>
+                                    <Image width={160} height={160} src={item.img} />
                                 </div>
                                 <div>
                                     <Link to={`/product/${item.id}`} style={{ color: 'black' }}>{item.name}</Link>
-                                    <span>|</span>
-                                    <span>Chính hãng VN/A</span>
+                                    <span> |</span>
+                                    <span> Chính hãng VN/A</span>
                                 </div>
                                 <div>
                                     <Price >{item.price} đ</Price>
@@ -55,7 +53,7 @@ const BestPhone = (props: Props) => {
                                         [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới 1.000.000đ
                                     </TextNote>
                                 </DivText>
-                                <button onClick={() => addTo(item)}>add to cart</button>
+                                <ButtonToCart onClick={() => addTo(item)}>Add to cart</ButtonToCart>
                             </Space>
                         </BoxPhone>
                     })}

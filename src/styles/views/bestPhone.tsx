@@ -44,5 +44,13 @@ export const Box = styled.div`
     margin-top: 15px;
 `
 export const ButtonToCart = styled.button`
-    width: 50px;
+   width: 100%;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: lightgray;
+    &:hover {
+        background-color: #e4e461;
+        color: white;
+    }
 `

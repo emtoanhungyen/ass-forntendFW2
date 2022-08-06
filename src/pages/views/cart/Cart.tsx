@@ -94,6 +94,7 @@ const Cart = (props: Props) => {
             ) : (
                 <My2>
                     <CartIsEmpty>Giỏ hàng đang trống</CartIsEmpty>
+                    {/* <BackToHome to='/'>Quay lại trang chủ</BackToHome> */}
                 </My2>
             )}
 
@@ -112,5 +113,9 @@ export const LinkCart = styled.div`
         background-color: #f4dada;
     }
 `
-
+const BackToHome = styled(Link)`
+    text-align: center;
+    font-size: 17px;
+    color: black;
+`
 export default Cart
