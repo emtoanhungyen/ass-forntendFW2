@@ -8,12 +8,13 @@ import { addPro } from '../../../api/product';
 // toastr
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
-
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { CategoryType } from '../../../types/Category';
 import { getAllCate } from '../../../api/category';
 import { uploadImage } from '../../../utils/upFiletoCloudinary';
+import FormItem from 'antd/lib/form/FormItem';
 
 type Props = {
   onAdd: (product: ProductType) => void
@@ -23,7 +24,6 @@ type InputForm = {
   id?: number,
   name: string,
   price: number,
-  quantity: number,
   disPrice: number,
   img?: string,
   desc: string,
@@ -38,6 +38,14 @@ const ProductAdd = ({ onAdd }: Props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
   const [preview, setPreview] = useState('');
+
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
 
   // const handelerImg = async (event: any) => {
   //   const file = event.target.files[0];
@@ -91,12 +99,11 @@ const ProductAdd = ({ onAdd }: Props) => {
             {errors.name && <span className='text-red-400'>Không được để trống.</span>}
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label">Số lượng</label>
             <input {...register('quantity', { required: true })} type="number" className="form-control" placeholder='Số lượng...' />
             {errors.quantity && <span className='text-red-400'>Không được để trống.</span>}
-          </div>
-
+          </div> */}
 
           <div className="mb-3">
             <label className="form-label">Ảnh</label>
@@ -107,13 +114,13 @@ const ProductAdd = ({ onAdd }: Props) => {
 
           <div className='row g-3 mb-3'>
             <div className="col">
-              <label htmlFor="exampleInputPassword1" className="form-label">Giá gốc</label>
+              <label className="form-label">Giá gốc</label>
               <input {...register('price', { required: true })} type="number" className="form-control" placeholder='Giá gốc...' />
               {errors.price && <span className='text-red-400'>Không được để trống.</span>}
             </div>
 
             <div className="col">
-              <label htmlFor="exampleInputPassword1" className="form-label">Giá khuyến mãi</label>
+              <label className="form-label">Giá khuyến mãi</label>
               <input {...register('disPrice', { required: true })} type="number" className="form-control" placeholder='Giá khuyến mãi...' />
               {errors.disPrice && <span className='text-red-400'>Không được để trống.</span>}
             </div>
@@ -143,83 +150,83 @@ const ProductAdd = ({ onAdd }: Props) => {
       {/* Bảng antd */}
       <div>
         {/* <Content>
-        <ContentLeft>
-          <Div1>
-            <input type="file"
-              {...register('img')}
-              accept="image/png, image/jpg, image/jpeg, image/gif"
-              onChange={handelerImg} />
-            <Span>Thêm ảnh</Span>
-          </Div1>
+          <ContentLeft>
+            <Div1>
+              <input type="file"
+                {...register('img')}
+                accept="image/png, image/jpg, image/jpeg, image/gif"
+              />
+              <Span>Thêm ảnh</Span>
+            </Div1>
 
-        </ContentLeft>
-        <ContentRight>
-          <P>Thông tin sản phẩm</P>
-          <hr />
-          <Form
-            name='basic'
-            layout="vertical"
-            // autoComplete="off"
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
-            
+          </ContentLeft>
+          <ContentRight>
+            <P>Thông tin sản phẩm</P>
+            <hr />
+            <Form
+              name='basic'
+              layout="vertical"
+              autoComplete="off"
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
 
-          >
-            <Form.Item
-              name="name"
-              label="Tên sản phẩm"
-              rules={[{ required: true, message: 'Tên sản phẩm không được để trống.' }]}
+
             >
-              <Input {...register('name')} />
-            </Form.Item>
-            <Space size={'small'}>
-              <FormItem
-                name="price"
-                label="Giá gốc"
-                rules={[{ required: true, message: 'Giá sản phẩm không được để trống.' }]}
+              <Form.Item
+                name="name"
+                label="Tên sản phẩm"
+                rules={[{ required: true, message: 'Tên sản phẩm không được để trống.' }]}
               >
-                <InputNumber style={{ width: '100%' }} />
+                <Input {...register('name')} />
+              </Form.Item>
+              <Space size={'small'}>
+                <FormItem
+                  name="price"
+                  label="Giá gốc"
+                  rules={[{ required: true, message: 'Giá sản phẩm không được để trống.' }]}
+                >
+                  <InputNumber style={{ width: '100%' }} />
+                </FormItem>
+
+                <FormItem
+                  name="disPrice"
+                  label="Giá khuyến mãi"
+                  rules={[{ required: true, message: 'Giá khuyến mãi không được để trống.' }]}
+                >
+                  <InputNumber style={{ width: '100%' }} />
+                </FormItem>
+              </Space>
+              <FormItem
+                name='category'
+                label="Danh mục"
+                rules={[{ required: true, message: 'Danh mục không được để trống.' }]}
+              >
+                <Select>
+                  <Select.Option value='dm1' >Danh mục 1</Select.Option>
+                  <Select.Option value='dm2' >Danh mục 2</Select.Option>
+                  <Select.Option value='dm3' >Danh mục 3</Select.Option>
+                  <Select.Option value='dm4' >Danh mục 4</Select.Option>
+                </Select>
               </FormItem>
 
-              <FormItem
-                name="disPrice"
-                label="Giá khuyến mãi"
-                rules={[{ required: true, message: 'Giá khuyến mãi không được để trống.' }]}
+              <Form.Item
+                name="description"
+                label="Mô tả"
+                rules={[{ message: 'Please input Intro' }]}
               >
-                <InputNumber style={{ width: '100%' }} />
-              </FormItem>
-            </Space>
-            <FormItem
-              name='category'
-              label="Danh mục"
-              rules={[{ required: true, message: 'Danh mục không được để trống.' }]}
-            >
-              <Select>
-                <Select.Option value='dm1' >Danh mục 1</Select.Option>
-                <Select.Option value='dm2' >Danh mục 2</Select.Option>
-                <Select.Option value='dm3' >Danh mục 3</Select.Option>
-                <Select.Option value='dm4' >Danh mục 4</Select.Option>
-              </Select>
-            </FormItem>
+                <Input.TextArea showCount maxLength={100} style={{ height: '121px' }} {...register('desc')} />
+              </Form.Item>
 
-            <Form.Item
-              name="description"
-              label="Mô tả"
-              rules={[{ message: 'Please input Intro' }]}
-            >
-              <Input.TextArea showCount maxLength={100} style={{ height: '121px' }} {...register('desc')} />
-            </Form.Item>
-
-            <Button
-              type="primary"
-              style={{ borderRadius: '5px' }}
-              htmlType="submit"
-            >
-              Thêm mới
-            </Button>
-          </Form>
-        </ContentRight>
-      </Content> */}
+              <Button
+                type="primary"
+                style={{ borderRadius: '5px' }}
+                htmlType="submit"
+              >
+                Thêm mới
+              </Button>
+            </Form>
+          </ContentRight>
+        </Content> */}
       </div>
     </div>
   )

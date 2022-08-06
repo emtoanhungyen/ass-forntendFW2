@@ -4,120 +4,99 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Flex, Span1, Span2 } from '../../../styles/views/ProductDetail'
-import { BorderButton, ButtonDathang, Container, DivTongTien, FlexButton, FlexContent, FlexImg, My2, SpanCart } from '../../../styles/views/Cart'
+import { BorderButton, ButtonDathang, CartIsEmpty, Container, DivTongTien, FlexButton, FlexContent, FlexImg, My2, SpanCart } from '../../../styles/views/Cart'
 
 // improt img
 import ImgCart from './../../../assets/images/imgcart.png'
+import { useAppDispatch, useAppSelector } from '../../../app/hook'
+import { ProductType } from '../../../types/Products'
+import { CartItem, decreQuantity, increQuantity, removeCart } from '../../../features/CartSlice'
 
-type Props = {}
+type Props = {
+}
 
 const Cart = (props: Props) => {
 
+    const { carts, total } = useAppSelector((item) => item.cart);
+
+    const dispatch = useAppDispatch();
+
+    const increment = (id: any) => {
+        dispatch(increQuantity(id))
+    }
+    
+    const decrement = (id: any) => {
+        dispatch(decreQuantity(id));
+    }
+
+    const remove = (id: any) => {
+        const confỉrm = window.confirm("Bạn có muốn xóa ?");
+        if (confỉrm) {
+            dispatch(removeCart(id));
+        }
+    }
 
     return (
         <Container>
-            <My2>
-                <Link style={{ color: 'red' }} to='/'>Trở về</Link>
-                <SpanCart>Giỏ hàng</SpanCart>
-            </My2>
-            <My2>
-                <Flex>
-                    <FlexImg>
-                        <Image src={ImgCart} width={193} height={193} />
-                    </FlexImg>
-                    <FlexContent>
-                        <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                            <div>
-                                <span style={{ fontSize: '16px' }}>Samsung Galaxy S22-Đen</span>
-                            </div>
-                            <div>
-                                <Span1>1.490.000 ₫</Span1>
-                                <Span2>4.490.000 ₫</Span2>
-                            </div>
-                            <Flex>
-                                <span>Chọn số lượng: </span>
-                                <BorderButton>
-                                    <span style={{ width: '25%' }}><MinusOutlined /></span>
-                                    <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>0</span>
-                                    <span style={{ width: '25%' }}><PlusOutlined /></span>
-                                </BorderButton>
+            {carts.length > 0 ? (
+                <>
+                    <My2>
+                        <Link style={{ color: 'red' }} to='/'>Trở về</Link>
+                        <SpanCart>Giỏ hàng</SpanCart>
+                    </My2>
+                    <My2>
+                        {carts.map((item) => {
+                            return <Flex>
+                                <FlexImg>
+                                    <Image src={item.img} width={193} height={193} />
+                                </FlexImg>
+                                <FlexContent>
+
+                                    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+                                        <div>
+                                            <span style={{ fontSize: '16px' }}>{item.name}</span>
+                                        </div>
+                                        <div>
+                                            <Span1>{item.price} đ</Span1>
+                                            <Span2>{item.disPrice} đ</Span2>
+                                        </div>
+                                        <Flex>
+                                            <span>Chọn số lượng: </span>
+                                            <BorderButton>
+                                                <span style={{ width: '25%' }}><MinusOutlined onClick={() => decrement(item.id)} /></span>
+                                                <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>{item.quantity}</span>
+                                                <span style={{ width: '25%' }}><PlusOutlined onClick={() => increment(item.id)} /></span>
+                                            </BorderButton>
+                                        </Flex>
+                                    </Space>
+
+                                </FlexContent>
+                                <FlexButton>
+                                    <CloseOutlined onClick={() => remove(item.id)} />
+                                </FlexButton>
                             </Flex>
-                        </Space>
-                    </FlexContent>
-                    <FlexButton>
-                        <CloseOutlined />
-                    </FlexButton>
-                </Flex>
-                <hr />
-                <Flex>
-                    <FlexImg>
-                        <Image src={ImgCart} width={193} height={193} />
-                    </FlexImg>
-                    <FlexContent>
-                        <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                            <div>
-                                <span style={{ fontSize: '16px' }}>Samsung Galaxy S22-Đen</span>
-                            </div>
-                            <div>
-                                <Span1>1.490.000 ₫</Span1>
-                                <Span2>4.490.000 ₫</Span2>
-                            </div>
-                            <Flex>
-                                <span>Chọn số lượng: </span>
-                                <BorderButton>
-                                    <span style={{ width: '25%' }}><MinusOutlined /></span>
-                                    <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>0</span>
-                                    <span style={{ width: '25%' }}><PlusOutlined /></span>
-                                </BorderButton>
-                            </Flex>
-                        </Space>
-                    </FlexContent>
-                    <FlexButton>
-                        <CloseOutlined />
-                    </FlexButton>
-                </Flex>
-                <hr />
-                <Flex>
-                    <FlexImg>
-                        <Image src={ImgCart} width={193} height={193} />
-                    </FlexImg>
-                    <FlexContent>
-                        <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                            <div>
-                                <span style={{ fontSize: '16px' }}>Samsung Galaxy S22-Đen</span>
-                            </div>
-                            <div>
-                                <Span1>1.490.000 ₫</Span1>
-                                <Span2>4.490.000 ₫</Span2>
-                            </div>
-                            <Flex>
-                                <span>Chọn số lượng: </span>
-                                <BorderButton>
-                                    <span style={{ width: '25%' }}><MinusOutlined /></span>
-                                    <span style={{ width: '50%', textAlign: 'center', paddingTop: '2px', paddingRight: '5px' }}>0</span>
-                                    <span style={{ width: '25%' }}><PlusOutlined /></span>
-                                </BorderButton>
-                            </Flex>
-                        </Space>
-                    </FlexContent>
-                    <FlexButton>
-                        <CloseOutlined />
-                    </FlexButton>
-                </Flex>
-                <hr />
-            </My2>
-            <My2>
-                <DivTongTien>
-                    <span>Tổng tiền tạm tính: </span>
-                    <Span1>17.800.000 đ</Span1>
-                </DivTongTien>
+                        })}
+
+                    </My2>
+                    <My2>
+                        <DivTongTien>
+                            <span>Tổng tiền tạm tính: </span>
+                            <Span1>{total} đ</Span1>
+                        </DivTongTien>
+                        <My2>
+                            <ButtonDathang>Tiến hành đặt hàng</ButtonDathang>
+                        </My2>
+                        <LinkCart>
+                            <Link style={{ color: 'red' }} to='/'>Chọn thêm sản phẩm khác</Link>
+                        </LinkCart>
+                    </My2>
+                </>
+            ) : (
                 <My2>
-                    <ButtonDathang>Tiến hành đặt hàng</ButtonDathang>
+                    <CartIsEmpty>Giỏ hàng đang trống</CartIsEmpty>
                 </My2>
-                <LinkCart>
-                    <Link style={{ color: 'red' }} to=''>Chọn thêm sản phẩm khác</Link>
-                </LinkCart>
-            </My2>
+            )}
+
         </Container>
     )
 }

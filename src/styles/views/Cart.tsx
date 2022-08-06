@@ -8,6 +8,12 @@ export const My2 = styled.div`
     margin-top: 10px;
     margin-bottom: 10px;
 `
+export const CartIsEmpty = styled.h3`
+    font-size: 16px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 180px;
+`
 export const Pt = styled.div`
     padding-bottom: 5px;
 `

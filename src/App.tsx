@@ -19,6 +19,8 @@ import { add, getAllCate, remove } from './api/category';
 // toastr
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
+import { ToastContainer, toast } from 'react-toastify';
+
 import { ProductType } from './types/Products';
 import { addPro, getAll, read, removePr } from './api/product';
 import { message } from 'antd';
@@ -101,6 +103,7 @@ function App() {
         <Route path='signin' element={<Signin />} />
         <Route path='signup' element={<Signup />} />
       </Routes>
+      {/* <ToastContainer style={{maxWidth: '230px'}} /> */}
     </div>
   )
 }

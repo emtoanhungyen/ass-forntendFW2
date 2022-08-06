@@ -1,7 +1,6 @@
 import { Image, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { BorderBoxSPCL, BoxPreview, BoxPreview1, BoxSPCL, BtnAddtoCart, Button, Container, Desc, DisPrice, DivBox, Flex, FlexL, FlexR, P, Preview, Price, Py2, Span1, Span2, SpanTitle, TitleSPCL } from '../../styles/views/ProductDetail'
-import IphoneDetail from './../../assets/images/iphoneDetail.png'
 import IphoneDetailPreview from './../../assets/images/ipDetailPreview.png'
 import ngoisao from './../../assets/images/ngoisao.png'
 import iconcart from './../../assets/images/Iconcart.png'
@@ -11,9 +10,9 @@ import { Link, useParams } from 'react-router-dom'
 import { read } from '../../api/product'
 import { ProductType } from '../../types/Products'
 import { useDispatch, useSelector } from 'react-redux'
-import { useAppSelector } from '../../app/hook'
+import { useAppDispatch, useAppSelector } from '../../app/hook'
 import { getOneProduct } from '../../features/ProductSlice'
-import cartSlice from './cart/CartSlice'
+import { addToCart } from '../../features/CartSlice'
 
 type Props = {
 }
@@ -21,21 +20,21 @@ type Props = {
 const ProductDetail = (props: Props) => {
     const { id } = useParams();
     const productDetail = useAppSelector((item: any) => item.product.value);
-    
-    const dispatch = useDispatch()
 
-    const addToCar = (cart: any) => {
-        dispatch<any>(addToCar(cart));
+    const dispatch = useAppDispatch()
+
+    const addToCart = (item: ProductType) => {
+        dispatch<any>(addToCart(item))
     }
 
     useEffect(() => {
-        dispatch<any>(getOneProduct(id))
+        dispatch(getOneProduct(id))
     }, [])
 
     return (
         <div>
             <Container>
-                <SpanTitle>Samsung Galaxy A73 (5G) 256GB</SpanTitle>
+                <SpanTitle>{productDetail.name}</SpanTitle>
             </Container>
             <hr />
             <Container>
@@ -83,14 +82,10 @@ const ProductDetail = (props: Props) => {
                         </div>
                         <BtnAddtoCart>
                             <Button>Mua ngay</Button>
-                            <StyleLink to='#'>
-                                <BorderImg>
-                                    <img style={{ paddingTop: '10px', paddingLeft: '10px' }} src={iconcart} />
-                                </BorderImg>
-                                <P>
-                                    Thêm vào giỏ hàng
-                                </P>
-                            </StyleLink>
+                            <BorderImg>
+                                <img style={{ paddingTop: '10px', paddingLeft: '10px' }} src={iconcart} />
+                            </BorderImg>
+                            <P>Thêm vào giỏ hàng</P>
                         </BtnAddtoCart>
                     </FlexR>
                 </Flex>
@@ -191,7 +186,7 @@ const Style = styled.div`
     margin-top: 1px;
     margin-left: 3px;
 `
-const StyleLink = styled(Link)`
+const StyleButton = styled.button`
     margin-left: 30px;
     display: flex;
 `

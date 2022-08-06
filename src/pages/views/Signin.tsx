@@ -13,21 +13,21 @@ const Signin = (props: Props) => {
             <BoxSignup>
                 <Left>
                     <FormCustom
-                        // name="basic"
+                        name="basic"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
                         initialValues={{ remember: true }}
-                        // onFinish={onFinish}
-                        // onFinishFailed={onFinishFailed}
+                        // onFinish={}
+                        // onFinishFailed={}
                         autoComplete="off"
                     >
-                        <FormItem
+                        <Form.Item
                             name="email"
-                            rules={[{ required: true, message: 'Không được để trống.' }]}
+                            rules={[{type: 'email', message: 'Không đúng định dạng email'},{ required: true, message: 'Không được để trống.' }]}
                         >
                             <label htmlFor="">Email</label>
                             <InputCustom />
-                        </FormItem>
+                        </Form.Item>
 
                         <Form.Item
                             name="password"
@@ -71,9 +71,9 @@ export const FormCustom = styled(Form)`
     padding-right: 15px;
     margin-top: 100px;
 `
-export const FormItem = styled(Form.Item)`
-    left: 10px;
-`
+// export const FormItem = styled(Form.Item)`
+//     left: 10px;
+// `
 export const InputCustom = styled(Input)`
     width: 525px;
     height: 40px;

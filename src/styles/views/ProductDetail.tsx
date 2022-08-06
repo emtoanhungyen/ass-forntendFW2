@@ -67,12 +67,14 @@ export const Button = styled.button`
         background-color: #e8555f;
     }
 `
-export const P = styled.p`
+export const P = styled.button`
+    background-color: white;
     color: black;
-    padding-top: 11px;
     padding-left: 10px;
+    border: none;
     &:hover {
         color: red;
+        border: none;
     }
 `
 // sản phẩm cùng loại

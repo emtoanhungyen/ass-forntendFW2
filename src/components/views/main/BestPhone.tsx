@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../../../app/hook'
+import { addToCart } from '../../../features/CartSlice'
 import { getProducts } from '../../../features/ProductSlice'
 import { Box, BoxPhone, Container, DisPrice, DivPhone, DivText, DivTitle, Price, Span } from '../../../styles/views/bestPhone'
 import { ProductType } from '../../../types/Products'
@@ -14,13 +15,16 @@ const { Text } = Typography
 
 const BestPhone = (props: Props) => {
     const products = useAppSelector(item => item.product.value)
-    console.log(products);
+    // console.log(products);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     useEffect(() => {
-        // useAppDispatch(getProducts())
-        dispatch<any>(getProducts())
+        dispatch(getProducts())
     }, [])
+
+    const addTo = (item: any) => {
+        dispatch(addToCart(item));
+    }
 
     return (
         <Container>
@@ -29,8 +33,8 @@ const BestPhone = (props: Props) => {
             </DivTitle>
             <DivPhone>
                 <Box>
-                    {products.map((item : any,index) => {
-                        return <BoxPhone >
+                    {products?.map((item : any,index) => {
+                        return <BoxPhone>
                             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                                 <div>
                                     <Link to={`/product/${item.id}`} >
@@ -51,6 +55,7 @@ const BestPhone = (props: Props) => {
                                         [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới 1.000.000đ
                                     </TextNote>
                                 </DivText>
+                                <button onClick={() => addTo(item)}>add to cart</button>
                             </Space>
                         </BoxPhone>
                     })}

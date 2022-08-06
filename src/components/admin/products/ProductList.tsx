@@ -51,11 +51,6 @@ const ProductList = ({ onRemove }: Props) => {
       key: 'name',
     },
     {
-      title: 'Số lượng',
-      dataIndex: 'quantity',
-      key: 'quantity',
-    },
-    {
       title: 'Ảnh',
       dataIndex: 'img',
       key: 'img',
@@ -122,7 +117,6 @@ const ProductList = ({ onRemove }: Props) => {
       price: item.price,
       disPrice: item.disPrice,
       category: item.category,
-      quantity: item.quantity,
       desc: item.desc
     }
   });

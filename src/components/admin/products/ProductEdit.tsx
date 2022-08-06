@@ -15,7 +15,6 @@ type InputForm = {
   id?: number,
   name: string,
   price: number,
-  quantity: number,
   disPrice: number,
   img?: string,
   desc: string,
@@ -68,7 +67,6 @@ const ProductEdit = (props: Props) => {
             {errors.name && <span className='text-red-400'>Không được để trống.</span>}
           </div>
 
-
           <div className="mb-3">
             <label className="form-label">Ảnh</label>
             <input {...register('img')}
@@ -76,7 +74,6 @@ const ProductEdit = (props: Props) => {
               type="file" className="form-control" />
             {errors.img && <span className='text-red-400'>Không được để trống.</span>}
           </div>
-
 
           <div className='row g-3 mb-3'>
             <div className="col">
@@ -92,6 +89,7 @@ const ProductEdit = (props: Props) => {
               {errors.disPrice && <span className='text-red-400'>Không được để trống.</span>}
             </div>
           </div>
+
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">Danh mục</label>
             <select {...register('category', { required: true })}
@@ -103,6 +101,7 @@ const ProductEdit = (props: Props) => {
             </select>
             {errors.category && <span className='text-red-400'>Không được để trống.</span>}
           </div>
+          
           <div className="mb-3">
             <label htmlFor="exampleFormControlTextarea1" className="form-label">Mô tả sản phẩm</label>
             <textarea {...register('desc')}

@@ -7,7 +7,6 @@ import BestPhone from './main/BestPhone'
 import LaptopComputer from './main/LaptopComputer'
 import Sider from './siderMenu/Sider'
 
-
 type Props = {}
 
 const Home = (props: Props) => {
