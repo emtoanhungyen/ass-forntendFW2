@@ -28,10 +28,10 @@ import Signin from './pages/views/Signin';
 import Signup from './pages/views/Signup';
 import ProductDetail from './pages/views/ProductDetail';
 import Cart from './pages/views/cart/Cart';
+import PrivteRoute from './utils/PrivateRouter';
 
 function App() {
 
-  const [count, setCount] = useState(0)
   const [categorys, setCategorys] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
 
@@ -82,7 +82,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
         </Route>
         {/* router admin */}
-        <Route path='admin' element={<LayoutAdmin />} >
+        <Route path='admin' element={<PrivteRoute> <LayoutAdmin /> </PrivteRoute>} >
           <Route index element={<HomeAdmin />} />
           {/* router products */}
           <Route path='products' >

@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux'
 import productReducer from '../features/ProductSlice'
 import categoryReducer from '../features/CategorySlice'
 import cartReducer from '../features/CartSlice'
+import userReducer from '../features/UserSlice'
 // ...
 export const store = configureStore({
     reducer: {
         product: productReducer,
         category: categoryReducer,
-        cart: cartReducer
+        cart: cartReducer,
+        user: userReducer
     },
 })
 

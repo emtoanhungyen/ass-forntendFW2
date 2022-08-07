@@ -1,7 +1,7 @@
 export type UserType = {
     id?: number,
-    name?: string,
     email: string,
-    sdt: number,
-    password: string
+    phone: number,
+    password: string,
+    role?: number
 }

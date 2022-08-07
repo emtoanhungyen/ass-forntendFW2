@@ -1,13 +1,40 @@
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Checkbox, Form, Input, message } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { login } from '../../api/users'
+import { useAppDispatch } from '../../app/hook'
+import { logIn } from '../../features/UserSlice'
 import { BoxSignup, Container, DivLogo, Left, Right } from '../../styles/views/signup'
 import Logo from './../../assets/images/anhhtus-logo 2.png'
 
 type Props = {}
 
 const Signin = (props: Props) => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate()
+    const onFinish = async (values: any) => {
+
+        try {
+            const { data } = await login(values);
+            localStorage.setItem('user', JSON.stringify(data));
+            message.success("Đăng nhập thành công");
+            if (data.user.role === 1) {
+                navigate('/admin');
+                message.success("Chào mừng admin");
+            } else {
+                navigate('/');
+                message.success("Chào user")
+            }
+        } catch (error) {
+            console.log(error);
+            message.error("Đã có lỗi xảy ra.");
+        }
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
     return (
         <Container>
             <BoxSignup>
@@ -17,30 +44,41 @@ const Signin = (props: Props) => {
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
                         initialValues={{ remember: true }}
-                        // onFinish={}
-                        // onFinishFailed={}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
                         <Form.Item
                             name="email"
-                            rules={[{type: 'email', message: 'Không đúng định dạng email'},{ required: true, message: 'Không được để trống.' }]}
+                            label="E-mail"
+                            style={{ display: 'block' }}
+                            rules={[
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid E-mail!',
+                                },
+                                {
+                                    required: true,
+                                    message: 'Please input your E-mail!',
+                                },
+                            ]}
                         >
-                            <label htmlFor="">Email</label>
-                            <InputCustom />
+                            <Input size='large' />
                         </Form.Item>
 
                         <Form.Item
+                            label="Password"
                             name="password"
-                            rules={[{ required: true, message: 'Không được để trống.' }]}
+                            style={{ display: 'block' }}
+                            rules={[{ required: true, message: 'Please input your password!' }]}
                         >
-                            <label htmlFor="">Mật khẩu</label>
-                            <InputCustom1 />
+                            <Input.Password size='large' />
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <ButCustom type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit">
                                 Đăng nhập
-                            </ButCustom>
+                            </Button>
                         </Form.Item>
                         <hr />
                         <Custom>
@@ -70,6 +108,12 @@ export const FormCustom = styled(Form)`
     padding-left: 15px;
     padding-right: 15px;
     margin-top: 100px;
+    .ant-col-16{
+        max-width: 100%;
+    }
+    .ant-col-offset-8 {
+    margin-left: 40%;
+    }
 `
 // export const FormItem = styled(Form.Item)`
 //     left: 10px;
