@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Menu } from 'antd';
 import styled from 'styled-components';
 import { Input, Tooltip } from 'antd';
@@ -6,16 +6,20 @@ import { Input, Tooltip } from 'antd';
 import Logo from './header/Logo';
 import Search from './header/Search';
 import Navigation from './header/Navigation';
+import { useAppSelector } from '../../app/hook';
+import axios from 'axios';
+import { searchByName } from '../../api/product';
 type Props = {}
 
 
 const Header = (props: Props) => {
+    
     return (
         <div>
             <Container mode="horizontal" defaultSelectedKeys={['mail']}>
                 <Navbar>
                     <Logo />
-                    <Search />
+                    <Search/>
                     <Navigation />
                 </Navbar>
             </Container>

@@ -9,8 +9,6 @@ import {
   Select,
 } from 'antd';
 import { ProductType } from '../../../types/Products';
-import { getAll, removePr } from '../../../api/product';
-import { useQuery } from 'react-query';
 // toastr
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
@@ -18,7 +16,7 @@ import { getAllCate } from '../../../api/category';
 import { CategoryType } from '../../../types/Category';
 import { SearchInput } from '../../../styles/admin/Layout';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useAppDispatch, useAppSelector } from '../../../app/hook';
+import { useAppSelector } from '../../../app/hook';
 import { getProducts } from '../../../features/ProductSlice';
 import { useDispatch } from 'react-redux';
 
@@ -31,7 +29,6 @@ const ProductList = ({ onRemove }: Props) => {
 
   const [category, setCategory] = useState<CategoryType[]>([]);
   const [search, setSearch] = useState("");
-  const [filterCategory, setFilterCategory] = useState<any>("");
   const products = useAppSelector(item => item.product.value);
   const dispatch = useDispatch()
   useEffect(() => {

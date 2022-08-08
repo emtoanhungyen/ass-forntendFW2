@@ -15,6 +15,9 @@ export const Span = styled.span`
 `
 export const DivTitle = styled.div`
     padding-left: 8%;
+    display: flex;
+    justify-content: space-between;
+
 `
 export const DivPhone = styled.div`
     margin-top: 20px;

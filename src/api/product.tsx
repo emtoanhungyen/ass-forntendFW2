@@ -26,3 +26,7 @@ export const getProductByCate = (category: any) => {
     const url = `/product?category=${category}`;
     return instance.get(url);
 }
+export const searchByName = (value: string) => {
+    const url = `/products?name=${value}`;
+    return instance.get(url);
+}
