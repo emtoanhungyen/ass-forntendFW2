@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { addPro, getAll, read, removePr, update } from "../api/product";
+import { addPro, getAll, getProductByCate, read, removePr, update } from "../api/product";
 import { ProductType } from "../types/Products";
 
 export const getProducts = createAsyncThunk(
@@ -38,6 +38,13 @@ export const updateProduct = createAsyncThunk(
         return data
     }
 )
+export const getProductByCategory = createAsyncThunk(
+    'product/getProductByCategory',
+    async (category: any) => {
+        const { data } = await getProductByCate(category);
+        return data
+    }
+)
 
 const ProductSlice = createSlice({
     name: "product",
@@ -55,6 +62,9 @@ const ProductSlice = createSlice({
             state.value = remove
         })
         builder.addCase(getOneProduct.fulfilled, (state, action) => {
+            state.value = action.payload
+        })
+        builder.addCase(getProductByCategory.fulfilled, (state, action) => {
             state.value = action.payload
         })
     },

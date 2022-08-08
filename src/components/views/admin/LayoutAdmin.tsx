@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { Layout } from 'antd';
 import styled from 'styled-components';
@@ -19,6 +19,7 @@ type Props = {}
 
 const LayoutAdmin = (props: Props) => {
     const [search, setSearch] = useState("");
+    const user = JSON.parse(localStorage.getItem('user') as string);
 
     return (
         <div>
@@ -41,7 +42,7 @@ const LayoutAdmin = (props: Props) => {
                                 setSearch(event.target.value);
                             }} />
                     </SearchBar>
-                    <SpanName>Xin chào Phạm Quốc Toản</SpanName>
+                    <SpanName>Xin chào {user.user.email}</SpanName>
                 </ContainerHeader>
                 <Layout>
                     <Sidebar />

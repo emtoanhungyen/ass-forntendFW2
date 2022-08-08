@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Ggmap from './../../../assets/images/map.png'
 import CartIcon from './../../../assets/images/cart.png'
@@ -10,17 +10,15 @@ import { logOut } from '../../../api/users'
 type Props = {}
 
 const Navigation = (props: Props) => {
-    const [logout, setLogout] = useState<any>(null);
     const login = JSON.parse(localStorage.getItem('user') as string);
     return (
         <Container>
             <Div>
                 <A to=''>Gọi mua hàng</A>
-                {/* <span>1900 8198</span> */}
             </Div>
             <Div>
                 <img src={Ggmap} alt="" />
-                <A to=''>Cửa hàng gần bạn</A>
+                <A to=''>Cửa hàng</A>
             </Div>
             <Div>
                 <img src={CartIcon} alt="" />
@@ -38,9 +36,10 @@ const Navigation = (props: Props) => {
                     </Link>
                 </Div>
             ) : (
-                <Div>
-                    <LogoutOutlined style={{ fontSize: '27px', color: 'white' }} onClick={() => logOut()} />
-                </Div>
+                <Div2>
+                    <Email>{login.user.email}</Email>
+                    <LogoutOutlined style={{ fontSize: '27px', color: 'white', marginTop: '20px', marginLeft: '10px' }} onClick={() => logOut()} />
+                </Div2>
             )}
 
 
@@ -55,12 +54,16 @@ const Div = styled.div`
     padding-right: 6px;
     line-height: 64px;
 `
+const Div2 = styled.div`    
+    display: flex;  
+    padding-right: 6px;
+    line-height: 64px;
+`
 const A = styled(Link)`
     color: white;
 `
-const Icon = styled.svg`
-    width: 25px;
-    height: 25px;
+
+const Email = styled.p`
     color: white;
 `
 

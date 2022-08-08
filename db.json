@@ -33,6 +33,15 @@
       "category": "Iphone",
       "desc": "",
       "id": 2
+    },
+    {
+      "name": "Máy tính 1",
+      "img": "http://res.cloudinary.com/dd0io3fh2/image/upload/v1659934970/wvbxxtdvvtvdaxbmogea.jpg",
+      "price": "12",
+      "disPrice": "12",
+      "category": "Laptop",
+      "desc": "",
+      "id": 3
     }
   ],
   "categorys": [

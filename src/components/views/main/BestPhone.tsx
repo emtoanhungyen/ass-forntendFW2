@@ -15,7 +15,6 @@ const { Text } = Typography
 
 const BestPhone = (props: Props) => {
     const products = useAppSelector(item => item.product.value)
-    // console.log(products);
 
     const dispatch = useAppDispatch();
     useEffect(() => {

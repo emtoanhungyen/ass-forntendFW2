@@ -1,18 +1,31 @@
 import { Image, Space } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { BorderBoxSPCL, BoxPreview, BoxPreview1, BoxSPCL, Button, Container, Desc, DisPrice, DivAddToCart, DivBox, DivClick, Flex, FlexL, FlexR, P, Preview, Price, Py2, Span1, Span2, SpanTitle, TitleSPCL } from '../../styles/views/ProductDetail'
+import React, { useEffect } from 'react'
+import {
+    BoxPreview,
+    BoxPreview1,
+    Button,
+    Container,
+    Desc, DisPrice,
+    DivAddToCart,
+    DivClick,
+    Flex,
+    FlexL,
+    FlexR,
+    P,
+    Preview,
+    Price,
+    SpanTitle
+} from '../../styles/views/ProductDetail'
 import IphoneDetailPreview from './../../assets/images/ipDetailPreview.png'
 import ngoisao from './../../assets/images/ngoisao.png'
 import iconcart from './../../assets/images/Iconcart.png'
-import Spcl from './../../assets/images/spcl1.png'
 import styled from 'styled-components'
-import { Link, useParams } from 'react-router-dom'
-import { read } from '../../api/product'
-import { ProductType } from '../../types/Products'
-import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hook'
 import { getOneProduct } from '../../features/ProductSlice'
 import { addToCart } from '../../features/CartSlice'
+import { getProductByCate } from '../../api/product'
+import ProductRelated from './ProductRelated'
 
 type Props = {
 }
@@ -21,17 +34,17 @@ const ProductDetail = (props: Props) => {
     const { id } = useParams();
     const productDetail = useAppSelector((item: any) => item.product.value);
     const dispatch = useAppDispatch()
-
     const addTo = (item: any) => {
         dispatch(addToCart(item));
     }
-
     useEffect(() => {
-        dispatch(getOneProduct(id))
+        dispatch(getOneProduct(id));
     }, [])
+    
+    
 
     return (
-        <div>
+        <div key={productDetail.id}>
             { }
             <Container>
                 <SpanTitle>{productDetail.name}</SpanTitle>
@@ -94,83 +107,7 @@ const ProductDetail = (props: Props) => {
                     </FlexR>
                 </Flex>
                 {/* Sản phẩm cùng loại */}
-                <BoxSPCL>
-                    <TitleSPCL>
-                        <SpanTitle>Sản phẩm cùng loại</SpanTitle>
-                    </TitleSPCL>
-                    <DivBox>
-                        <BorderBoxSPCL>
-                            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                                <StyleIMgSPCL>
-                                    <Image src={Spcl} width={160} height={160} />
-                                </StyleIMgSPCL>
-                                <Py2>
-                                    <Link to="#">Tai nghe Bluetooth Samsung Galaxy Buds Live</Link>
-                                </Py2>
-                                <Py2>
-                                    <Span1>1.490.000 ₫</Span1>
-                                    <Span2>4.490.000 ₫</Span2>
-                                </Py2>
-                            </Space>
-                        </BorderBoxSPCL>
-                        <BorderBoxSPCL>
-                            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                                <StyleIMgSPCL>
-                                    <Image src={Spcl} width={160} height={160} />
-                                </StyleIMgSPCL>
-                                <Py2>
-                                    <Link to="#">Tai nghe Bluetooth Samsung Galaxy Buds Live</Link>
-                                </Py2>
-                                <Py2>
-                                    <Span1>1.490.000 ₫</Span1>
-                                    <Span2>4.490.000 ₫</Span2>
-                                </Py2>
-                            </Space>
-                        </BorderBoxSPCL>
-                        <BorderBoxSPCL>
-                            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                                <StyleIMgSPCL>
-                                    <Image src={Spcl} width={160} height={160} />
-                                </StyleIMgSPCL>
-                                <Py2>
-                                    <Link to="#">Tai nghe Bluetooth Samsung Galaxy Buds Live</Link>
-                                </Py2>
-                                <Py2>
-                                    <Span1>1.490.000 ₫</Span1>
-                                    <Span2>4.490.000 ₫</Span2>
-                                </Py2>
-                            </Space>
-                        </BorderBoxSPCL>
-                        <BorderBoxSPCL>
-                            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                                <StyleIMgSPCL>
-                                    <Image src={Spcl} width={160} height={160} />
-                                </StyleIMgSPCL>
-                                <Py2>
-                                    <Link to="#">Tai nghe Bluetooth Samsung Galaxy Buds Live</Link>
-                                </Py2>
-                                <Py2>
-                                    <Span1>1.490.000 ₫</Span1>
-                                    <Span2>4.490.000 ₫</Span2>
-                                </Py2>
-                            </Space>
-                        </BorderBoxSPCL>
-                        <BorderBoxSPCL>
-                            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                                <StyleIMgSPCL>
-                                    <Image src={Spcl} width={160} height={160} />
-                                </StyleIMgSPCL>
-                                <Py2>
-                                    <Link to="#">Tai nghe Bluetooth Samsung Galaxy Buds Live</Link>
-                                </Py2>
-                                <Py2>
-                                    <Span1>1.490.000 ₫</Span1>
-                                    <Span2>4.490.000 ₫</Span2>
-                                </Py2>
-                            </Space>
-                        </BorderBoxSPCL>
-                    </DivBox>
-                </BoxSPCL>
+                <ProductRelated />
                 {/* Mô tả sản phẩm */}
                 <div>
                     <div>
