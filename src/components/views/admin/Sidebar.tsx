@@ -22,7 +22,7 @@ const items2: MenuProps['items'] = [
   {
     key: `tablet`,
     icon: React.createElement(TabletOutlined),
-    label: <Link to='/admin/tablet'>Máy tính bảng</Link>
+    label: <Link to='/admin/users'>User</Link>
   },
   {
     key: `sould`,

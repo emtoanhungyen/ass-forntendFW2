@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addUser, login } from "../api/users";
+import { addUser, getAllUsers, login } from "../api/users";
 import { UserType } from "../types/Users";
 import { toast } from 'react-toastify';
 import { message } from "antd";
@@ -18,6 +18,13 @@ export const logIn = createAsyncThunk(
         return data
     }
 )
+export const getUser = createAsyncThunk(
+    'user/getUser',
+    async () => {
+        const { data } = await getAllUsers();
+        return data
+    }
+)
 
 const userSlice = createSlice({
     name: "user",
@@ -33,16 +40,19 @@ const userSlice = createSlice({
                 console.log(error);
             }
         }),
-        builder.addCase(logIn.fulfilled, (state, action) => {
-            try {
+            builder.addCase(logIn.fulfilled, (state, action) => {
+                try {
+                    state.value = action.payload
+                    localStorage.setItem('user', JSON.stringify(action.payload));
+                    console.log('dang nhap thanh cong');
+                } catch (error) {
+                    console.log(error);
+                    message.error("Đã xảy ra lỗi.");
+                }
+            }),
+            builder.addCase(getUser.fulfilled, (state, action) => {
                 state.value = action.payload
-                localStorage.setItem('user', JSON.stringify(action.payload));
-                console.log('dang nhap thanh cong');
-            } catch (error) {
-                console.log(error);
-                message.error("Đã xảy ra lỗi.");
-            }
-        })
+            })
     }
 })
 export default userSlice.reducer

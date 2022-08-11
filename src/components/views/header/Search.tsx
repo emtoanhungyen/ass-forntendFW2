@@ -24,34 +24,34 @@ const Search: React.FC = () => {
 
    function renderOption(item: any) {
       return (
-         <Option >
-            <div
-               onClick={() => setSearch([])}
-               style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-               }}
+        <Option >
+          <div
+            onClick={() => setSearch([])}
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Link
+              style={{
+                  width: '100%',
+                color: '#000',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+              to={`/product/${item.id}`}
             >
-               <Link
-                  style={{
-                     width: '100%',
-                     color: '#000',
-                     justifyContent: 'space-between',
-                     alignItems: 'center',
-                  }}
-                  to={`/product/${item.id}`}
-               >
-                  <img src={item.img} alt={item.name} width={50} />
-                  <span>{item.name}</span>
-
-               </Link>
-            </div>
-         </Option>
+              <span>{item.name}</span>
+              <img src={item.img} alt={item.name} width={50} />
+            </Link>
+          </div>
+        </Option>
       );
-   }
+    }
 
-   const searchProduct = async (value: string) => {
+   const searchProduct = async (value: any) => {
       console.log(value);
       if (value.length > 3) {
          const { data } = await searchByName(value);
@@ -61,11 +61,11 @@ const Search: React.FC = () => {
       setSearch([]);
       return;
    }
-
+   
    const debonuce = React.useRef(debounce(searchProduct, 500)).current
    useEffect(() => {
       console.log(search);
-   }, [search]);
+    }, [search]);
    return (
       <Container>
          <SearchBar

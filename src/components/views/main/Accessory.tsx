@@ -9,7 +9,6 @@ const { Text } = Typography
 type Props = {}
 
 
-
 const Accessory = (props: Props) => {
     return (
         <Container>

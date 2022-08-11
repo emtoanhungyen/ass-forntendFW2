@@ -36,7 +36,7 @@ const cartSlice = createSlice({
 
             } else {
                 state.carts.push({ ...product, quantity: 1 })
-                toastr.success(`${product.name} đã được thêm vào giỏ hàng.`);
+                toast.success(`Đã thêm ${product.name} vào giỏ hàng.`);
                 console.log("Thêm mới");
             }
             state.totalItem += 1;

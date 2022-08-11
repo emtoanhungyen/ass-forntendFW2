@@ -63,7 +63,7 @@ const BestPhone = (props: Props) => {
                                     <TextNote>
                                         [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới 1.000.000đ
                                     </TextNote>
-                                </DivText>F
+                                </DivText>
                                 <ButtonToCart onClick={() => addTo(item)}>Add to cart</ButtonToCart>
                             </Space>
                         </BoxPhone>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import 'antd/dist/antd.css';
 import Home from './components/views/Home';
-import { Route, Routes, useParams } from 'react-router-dom'
+import { Route, Router, Routes, useParams } from 'react-router-dom'
 import LayoutHome from './components/views/LayoutHome';
 import LayoutAdmin from './components/views/admin/LayoutAdmin';
 import HomeAdmin from './components/views/admin/HomeAdmin';
@@ -29,6 +29,7 @@ import Signup from './pages/views/Signup';
 import ProductDetail from './pages/views/ProductDetail';
 import Cart from './pages/views/cart/Cart';
 import PrivteRoute from './utils/PrivateRouter';
+import ListUser from './components/admin/users/ListUser';
 
 function App() {
 
@@ -96,6 +97,10 @@ function App() {
             <Route path='add' element={<AddCategory onAdd={onHandleCreate} />} />
             <Route path=':id/edit' element={<EditCategory />} />
           </Route>
+          {/* router user */}
+          <Route path='users'>
+            <Route index element={<ListUser />} />
+          </Route>
         </Route>
         {/* 404 */}
         <Route path='*' element={<Errors404 />} />
@@ -103,7 +108,6 @@ function App() {
         <Route path='signin' element={<Signin />} />
         <Route path='signup' element={<Signup />} />
       </Routes>
-      {/* <ToastContainer style={{maxWidth: '230px'}} /> */}
     </div>
   )
 }
